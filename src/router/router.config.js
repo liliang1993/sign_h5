@@ -6,7 +6,7 @@ export const constantRouterMap = [
   {
     path: '/',
     component: () => import('@/views/layouts/index'),
-    redirect: '/home',
+    redirect: '/sign',
     meta: {
       title: '首页',
       keepAlive: false
@@ -23,6 +23,12 @@ export const constantRouterMap = [
         name: 'About',
         component: () => import('@/views/home/about'),
         meta: { title: '关于我', keepAlive: false }
+      },
+      {
+        path: '/sign',
+        name: 'Sign',
+        component: () => import('@/views/sign'),
+        meta: { title: '签名', keepAlive: false }
       }
     ]
   }
