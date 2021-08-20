@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Author: ll
+ * @Date: 2021-08-20 10:56:05
+ * @LastEditors: ll
+ * @LastEditTime: 2021-08-20 10:57:34
+ * @FilePath: /vue-h5-template/src/utils/request.js
+ */
 import axios from 'axios'
 import store from '@/store'
 import { Toast } from 'vant'
@@ -17,7 +25,8 @@ service.interceptors.request.use(
     if (!config.hideloading) {
       // loading
       Toast.loading({
-        forbidClick: true
+        forbidClick: true,
+        duration: 0
       })
     }
     if (store.getters.token) {

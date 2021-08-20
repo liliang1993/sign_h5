@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-19 10:39:28
  * @LastEditors: ll
- * @LastEditTime: 2021-08-19 16:19:23
+ * @LastEditTime: 2021-08-20 10:53:14
  * @FilePath: /vue-h5-template/src/api/upload.js
  */
 import api from './index'
@@ -19,8 +19,7 @@ export function uploadFile(params) {
     headers: {
       'content-type': 'multipart/form-data'
     },
-    timeout: 120000,
-    hideloading: true
+    timeout: 120000
   })
 }
 export function uploadPDF(params) {
@@ -31,7 +30,6 @@ export function uploadPDF(params) {
     headers: {
       'content-type': 'application/json'
     },
-    timeout: 120000,
-    hideloading: true
+    timeout: 120000
   })
 }

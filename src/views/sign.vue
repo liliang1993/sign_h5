@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-19 18:01:28
+ * @LastEditTime: 2021-08-20 11:04:57
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
@@ -29,6 +29,7 @@
         <img v-if="url" width="100" height="auto" :src="url" alt="" />
         <span v-else>签名显示处</span>
       </div> -->
+       <van-button style="flex: 1; height: 100%" type="primary"  @click="handlePostMessage">测试返回小程序</van-button>
       <van-button style="flex: 1; height: 100%" :type="url ? 'danger' : 'info'" @click="showSignPad = true">{{
         url ? '重签' : '签名'
       }}</van-button>
@@ -240,7 +241,6 @@ export default {
         const file = this.blobToFile(blob)
         params.append('file', file)
         // params.append('name', 'sign.pdf')
-
         uploadFile(params)
           .then(res => {})
           .catch(e => {
