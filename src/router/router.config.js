@@ -29,6 +29,12 @@ export const constantRouterMap = [
         name: 'Sign',
         component: () => import('@/views/sign'),
         meta: { title: '签名', keepAlive: false }
+      },
+      {
+        path: '/upload-idcard',
+        name: 'UploadIDcard',
+        component: () => import('@/views/uploadIdCard'),
+        meta: { title: '上传身份证', keepAlive: false }
       }
     ]
   }

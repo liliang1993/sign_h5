@@ -17,6 +17,7 @@
     "jspdf": "^2.3.1",
     "lib-flexible": "^0.3.2",
     "lodash": "^4.17.15",
+    "moment": "^2.29.1",
     "regenerator-runtime": "^0.13.5",
     "sign-canvas": "^1.1.4",
     "vant": "^2.10.2",

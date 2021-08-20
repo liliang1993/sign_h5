@@ -54,7 +54,7 @@ module.exports = {
     proxy: {
       // 配置跨域
       '/api': {
-        target: 'http://atomizer.zyjyapp.com',
+        target: 'https://test.zyqgwhq.com',
         // ws:true,
         changOrigin: true,
         pathRewrite: {

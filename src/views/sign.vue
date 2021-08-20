@@ -3,34 +3,36 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-19 16:10:09
+ * @LastEditTime: 2021-08-19 18:01:28
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
   <div class="index-container">
     <div id="pdfDom">
       <div class="agreement-wrapper">
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
-        我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议我是协议
+        <h2>承诺书</h2>
+        <p>
+          本人/单位系深圳深中源科技有限公司电子烟产品的经销商，关于经销深圳深中源科技有限公司电子烟事宜，本人/单位在此向深圳深中源科技有限公司作出以下承诺：
+        </p>
+        <p>
+          在推广、销售深圳深中源科技有限公司的电子烟等产品过程中，本人/单位承诺遵守国家法律法规、国家政策、公司规章制度以及公序良俗，不向未成年人及孕妇、哺乳期妇女、重大疾病患者及其他不适合使用电子烟的人员出售，坚决不在不允许经营的场所推广、销售，不在微信朋友圈、线上商城、自动贩卖机、车载便利店和烟草等渠道开展推广、销售。否则，造成的一切后果全部由本人承担负责，深圳深中源科技有限公司因此遭受损失的，损失由本人/单位承担。深圳深中源科技有限公司可以根据实际情况需要调整、更新规章制度，本人/单位承诺无条件遵守深圳深中源科技有限公司更新后的规定。
+        </p>
+        <p>特此承诺！</p>
       </div>
       <div class="sign-show-wrapper">
         <img v-if="url" width="200" height="100%" :src="url" alt="" />
+        <p>{{ signDate }}</p>
       </div>
     </div>
     <div class="action-wrap">
-      <div class="sign-show-box">
+      <!-- <div class="sign-show-box">
         <img v-if="url" width="100" height="auto" :src="url" alt="" />
         <span v-else>签名显示处</span>
-      </div>
-      <van-button style="flex: 1; height: 100%" :type="url ? 'danger' : 'info'" @click="handlePostMessage">{{
+      </div> -->
+      <van-button style="flex: 1; height: 100%" :type="url ? 'danger' : 'info'" @click="showSignPad = true">{{
         url ? '重签' : '签名'
       }}</van-button>
-      <van-button style="flex: 1; height: 100%" type="info" v-show="url" @click="handleAgree">同意</van-button>
+      <van-button style="flex: 1; height: 100%" type="info" v-show="url" @click="getPdf">同意</van-button>
     </div>
     <div v-if="showSignPad" class="sign-wrap">
       <div class="sign-head">
@@ -53,10 +55,12 @@ import { uploadFile, uploadPDF } from '@/api/upload.js'
 import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
 import wx from 'weixin-js-sdk'
+import moment from 'moment'
 
 export default {
   data() {
     return {
+      signDate: '',
       value: null,
       options: {
         // isFullScreen: true,
@@ -79,8 +83,13 @@ export default {
         imgType: 'png' // 下载的图片格式  [String] 可选为 jpeg  canvas本是透明背景的
       },
       url: '',
-      showSignPad: true,
+      showSignPad: false,
       htmlTitle: '协议'
+    }
+  },
+  watch: {
+    url(val) {
+      this.signDate = moment(new Date()).format('yyyy年MM月DD日')
     }
   },
   methods: {
@@ -207,32 +216,32 @@ export default {
         var imgWidth = 595.28
         var imgHeight = (592.28 / contentWidth) * contentHeight
         var pageData = canvas.toDataURL('image/jpeg', 1.0)
-        var PDF = new JsPDF('', 'pt', 'a4')
-        // PDF.setProperties({
-        //   title: 'PDF Title'
-        // })
-        if (leftHeight < pageHeight) {
-          PDF.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight)
-        } else {
-          while (leftHeight > 0) {
-            PDF.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-            leftHeight -= pageHeight
-            position -= 841.89
-            if (leftHeight > 0) {
-              PDF.addPage()
-            }
-          }
-        }
-        // PDF.save('签名.pdf')
-        this.pdfData = PDF.output('blob')
-        console.log(PDF)
+        // var PDF = new JsPDF('', 'pt', 'a4')
+        // // PDF.setProperties({
+        // //   title: 'PDF Title'
+        // // })
+        // if (leftHeight < pageHeight) {
+        //   PDF.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight)
+        // } else {
+        //   while (leftHeight > 0) {
+        //     PDF.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+        //     leftHeight -= pageHeight
+        //     position -= 841.89
+        //     if (leftHeight > 0) {
+        //       PDF.addPage()
+        //     }
+        //   }
+        // }
+        // // PDF.save('签名.pdf')
+        // this.pdfData = PDF.output('blob')
+        // console.log(PDF)
         const params = new FormData()
-        // const blob = this.dataURLtoBlob(this.pdfData)
-        const file = this.blobToFile(this.pdfData)
+        const blob = this.dataURLtoBlob(pageData)
+        const file = this.blobToFile(blob)
         params.append('file', file)
-        params.append('name', 'sign.pdf')
+        // params.append('name', 'sign.pdf')
 
-        uploadPDF(params)
+        uploadFile(params)
           .then(res => {})
           .catch(e => {
             console.log('e')
@@ -255,12 +264,17 @@ export default {
 <style>
 .index-container {
   font-size: 14px;
-  padding: 10px 10px 60px;
+  padding: 10px 0 100px;
   overflow: scroll;
 }
-.agreement-wrapper {
-  /* height: 50vh; */
-  /* overflow: scroll; */
+#pdfDom {
+  padding: 0 10px;
+}
+.agreement-wrapper > h2 {
+  text-align: center;
+}
+.agreement-wrapper > p {
+  text-indent: 2em;
 }
 .sign-canvas {
   display: block;
@@ -276,6 +290,10 @@ export default {
 }
 .sign-show-wrapper {
   text-align: right;
+  padding-bottom: 10px;
+}
+.sign-show-wrapper p {
+  margin: 0;
 }
 .sign-show-box {
   width: 100px;
