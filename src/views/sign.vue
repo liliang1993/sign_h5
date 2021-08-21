@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-20 11:04:57
+ * @LastEditTime: 2021-08-20 17:29:51
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
@@ -264,7 +264,7 @@ export default {
 <style>
 .index-container {
   font-size: 14px;
-  padding: 10px 0 100px;
+  /* padding: 10px 0 100px; */
   overflow: scroll;
 }
 #pdfDom {
@@ -301,7 +301,7 @@ export default {
   line-height: 50px;
 }
 .sign-wrap {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: row-reverse;
   left: 0;
@@ -310,6 +310,16 @@ export default {
   bottom: 0;
   z-index: 999;
   background: #fff;
+  animation: show 0.5s;
+}
+
+@keyframes show {
+  0% {
+    transform: rotate(-40deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 .sign-head {
   background: #ccc;
