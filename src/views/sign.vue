@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-21 11:29:04
+ * @LastEditTime: 2021-08-21 11:44:30
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
@@ -242,7 +242,9 @@ export default {
         params.append('file', file)
         // params.append('name', 'sign.pdf')
         uploadFile(params)
-          .then(res => {})
+          .then(res => {
+            this.handlePostMessage()
+          })
           .catch(e => {
             console.log('e')
           })
@@ -256,7 +258,7 @@ export default {
         }
       })
       wx.miniProgram.navigateTo({
-        url: '/pages/upload/upload'
+        url: '/pages/upload/upload?url=' + this.url
       })
     }
   }
