@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-21 11:44:30
+ * @LastEditTime: 2021-08-21 13:02:06
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
@@ -85,7 +85,8 @@ export default {
       },
       url: '',
       showSignPad: false,
-      htmlTitle: '协议'
+      htmlTitle: '协议',
+      imgUrl: ''
     }
   },
   watch: {
@@ -243,6 +244,9 @@ export default {
         // params.append('name', 'sign.pdf')
         uploadFile(params)
           .then(res => {
+            console.log('res', res)
+            const { url } = res
+            this.imgUrl = url
             this.handlePostMessage()
           })
           .catch(e => {
@@ -258,7 +262,7 @@ export default {
         }
       })
       wx.miniProgram.navigateTo({
-        url: '/pages/upload/upload?url=' + this.url
+        url: '/pages/upload/upload?url=' + this.imgUrl
       })
     }
   }

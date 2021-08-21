@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-20 10:56:05
  * @LastEditors: ll
- * @LastEditTime: 2021-08-20 10:57:34
+ * @LastEditTime: 2021-08-21 13:01:00
  * @FilePath: /vue-h5-template/src/utils/request.js
  */
 import axios from 'axios'
