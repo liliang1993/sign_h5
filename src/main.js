@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-19 01:16:38
  * @LastEditors: ll
- * @LastEditTime: 2021-08-24 00:55:32
+ * @LastEditTime: 2021-08-24 15:20:25
  * @FilePath: /vue-h5-template/src/main.js
  */
 // 兼容 IE
@@ -26,7 +26,7 @@ import '@/plugins/vant'
 import '@/assets/css/index.scss'
 // 移动端适配
 import 'lib-flexible/flexible.js'
-var vConsole = new VConsole();
+// var vConsole = new VConsole();
 
 // filters
 import './filters'
