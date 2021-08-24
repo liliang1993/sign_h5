@@ -3,14 +3,14 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-21 13:12:56
+ * @LastEditTime: 2021-08-24 10:02:11
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
   <div class="index-container">
     <div id="pdfDom">
       <div class="agreement-wrapper">
-        <h2>承诺书</h2>
+        <h2>承诺书1</h2>
         <p>
           本人/单位系深圳深中源科技有限公司电子烟产品的经销商，关于经销深圳深中源科技有限公司电子烟事宜，本人/单位在此向深圳深中源科技有限公司作出以下承诺：
         </p>
@@ -39,7 +39,7 @@
       <div class="sign-head">
         <div class="title">用户签名</div>
       </div>
-      <signature ref="signature"></signature>
+      <signature ref="signature" lineColor="black"></signature>
       <div class="sign-bottom">
         <div class="button-wrapper">
           <van-button id="reset" @click="showSignPad = false"> 取消 </van-button>
