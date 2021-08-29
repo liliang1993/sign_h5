@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-19 10:39:28
  * @LastEditors: ll
- * @LastEditTime: 2021-08-20 10:53:14
+ * @LastEditTime: 2021-08-26 17:19:09
  * @FilePath: /vue-h5-template/src/api/upload.js
  */
 import api from './index'
@@ -14,18 +14,20 @@ import request from '@/utils/request'
 export function uploadFile(params) {
   return request({
     url: api.UploadFile,
-    method: 'post',
+    method: 'POST',
     data: params,
     headers: {
-      'content-type': 'multipart/form-data'
+      post: {
+        'Content-Type': 'multipart/form-data'
+      }
     },
-    timeout: 120000
+    timeout: 3000000
   })
 }
 export function uploadPDF(params) {
   return request({
     url: api.UploadPDF,
-    method: 'post',
+    method: 'POST',
     data: params,
     headers: {
       'content-type': 'application/json'

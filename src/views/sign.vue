@@ -3,7 +3,7 @@
  * @Author: ll
  * @Date: 2021-08-18 21:48:00
  * @LastEditors: ll
- * @LastEditTime: 2021-08-24 14:02:16
+ * @LastEditTime: 2021-08-29 11:27:43
  * @FilePath: /vue-h5-template/src/views/sign.vue
 -->
 <template>
@@ -20,7 +20,7 @@
         <p>特此承诺！</p>
       </div>
       <div class="sign-show-wrapper">
-        <img v-if="url" width="200" height="100%" :src="url" alt="" />
+        <img v-if="url" width="100" height="100%" :src="url" alt="" />
         <p>{{ signDate }}</p>
       </div>
     </div>
@@ -88,6 +88,11 @@ export default {
       htmlTitle: '协议',
       imgUrl: ''
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    const { token } = to.query
+    localStorage.setItem('token', token)
+    next()
   },
   watch: {
     url(val) {
@@ -241,12 +246,12 @@ export default {
         const blob = this.dataURLtoBlob(pageData)
         const file = this.blobToFile(blob)
         params.append('file', file)
-        // params.append('name', 'sign.pdf')
+        params.append('name', 'image.jpg')
         uploadFile(params)
           .then(res => {
-            console.log('res', res)
-            const { url } = res
-            this.imgUrl = url
+            console.log('res1', res)
+            const { data } = res
+            this.imgUrl = data
             this.handlePostMessage()
           })
           .catch(e => {

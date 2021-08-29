@@ -54,9 +54,10 @@ module.exports = {
     proxy: {
       // 配置跨域
       '/api': {
-        target: 'https://test.zyqgwhq.com',
+        target: 'https://www.zyqgwhq.com',
         // ws:true,
         changOrigin: true,
+        secure: false,
         pathRewrite: {
           '^/api': '/api'
         }

@@ -1,9 +1,9 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: ll
  * @Date: 2021-08-20 10:56:05
  * @LastEditors: ll
- * @LastEditTime: 2021-08-21 13:01:00
+ * @LastEditTime: 2021-08-26 17:16:31
  * @FilePath: /vue-h5-template/src/utils/request.js
  */
 import axios from 'axios'
@@ -29,9 +29,11 @@ service.interceptors.request.use(
         duration: 0
       })
     }
-    if (store.getters.token) {
-      config.headers['X-Token'] = ''
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token
     }
+    console.log('config', config)
     return config
   },
   error => {
